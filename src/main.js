@@ -109,6 +109,8 @@ function getRandomIndex(array) {
 }
 
 window.addEventListener('load', function() {
-  var titleIndex = getRandomIndex(titles)
+  var coverIndex = getRandomIndex(covers);
+  var titleIndex = getRandomIndex(titles);
+  coverImage.src = covers[coverIndex];
   title.textContent = titles[titleIndex];
 });
