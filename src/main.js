@@ -111,4 +111,9 @@ function getRandomIndex(array) {
 window.addEventListener('load', function() {
   var titleIndex = getRandomIndex(titles)
   title.textContent = titles[titleIndex];
+
+  var randomDescrip1 = getRandomIndex(descriptors);
+  var randomDescrip2 = getRandomIndex(descriptors);
+  descriptor1.innerText = descriptors[randomDescrip1];
+  descriptor2.innerText = descriptors[randomDescrip2];
 });
