@@ -8,6 +8,7 @@ var btnRandomCover = document.querySelector(".random-cover-button");
 var btnMakeNewCover = document.querySelector(".make-new-button");
 var btnViewSavedCover = document.querySelector(".view-saved-button");
 var btnHome = document.querySelector(".home-button");
+var btnSaveCover = document.querySelector(".save-cover-button");
 var homeView = document.querySelector(".home-view");
 var formView = document.querySelector(".form-view");
 
@@ -15,11 +16,19 @@ var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
 
+
+window.addEventListener('load', createRandomCover);
+
+btnMakeNewCover.addEventListener('click', showCoverForm);
+
+btnRandomCover.addEventListener('click', createRandomCover);
+
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-function createRandomCover(){
+function createRandomCover() {
   var randomCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)])
   coverImage.src = randomCover.cover;
   title.textContent = randomCover.title;
@@ -28,16 +37,10 @@ function createRandomCover(){
 }
 
 function showCoverForm() {
-  btnRandomCover.classList.add(".hidden");
-  btnViewSavedCover.classList.add(".hidden");
-  homeView.classList.add(".hidden");
-  btnHome.classList.remove(".hidden");
-  formView.classList.remove(".hidden");
+  homeView.classList.add("hidden");
+  btnSaveCover.classList.add("hidden");
+  btnRandomCover.classList.add("hidden");
+  btnViewSavedCover.classList.add("hidden");
+  formView.classList.remove("hidden");
+  btnHome.classList.remove("hidden");
 }
-
-
-window.addEventListener('load', createRandomCover);//updated this to look like btnRandomCover Event listener
-
-btnRandomCover.addEventListener('click', createRandomCover);
-
-btnMakeNewCover.addEventListener('click', showCoverForm);
