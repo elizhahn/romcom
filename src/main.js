@@ -40,7 +40,6 @@ function showCoverForm() {
   homeView.classList.add("hidden");
   btnSaveCover.classList.add("hidden");
   btnRandomCover.classList.add("hidden");
-  btnViewSavedCover.classList.add("hidden");
   formView.classList.remove("hidden");
   btnHome.classList.remove("hidden");
 }
