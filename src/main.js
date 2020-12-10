@@ -18,7 +18,7 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-window.addEventListener('load', function() {
+function createRandomCover(){
   var coverIndex = getRandomIndex(covers);
   var titleIndex = getRandomIndex(titles);
   coverImage.src = covers[coverIndex];
@@ -27,4 +27,6 @@ window.addEventListener('load', function() {
   var randomDescrip2 = getRandomIndex(descriptors);
   descriptor1.innerText = descriptors[randomDescrip1];
   descriptor2.innerText = descriptors[randomDescrip2];
-});
+}
+
+window.addEventListener('load', createRandomCover());
