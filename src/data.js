@@ -1,7 +1,7 @@
 var covers = [
   './assets/bluebrocade.jpg',
-  './assets/dance.jpg', 
-  './assets/embrace.jpg',
+  './assets/dance.jpg',
+  './assets/embrace.jpg', //This jpg is not working
   './assets/fire.png',
   './assets/frock.png',
   './assets/glorious.jpg',
