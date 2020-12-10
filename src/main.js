@@ -18,15 +18,14 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-function createRandomCover(){
-  var coverIndex = getRandomIndex(covers);
-  var titleIndex = getRandomIndex(titles);
-  coverImage.src = covers[coverIndex];
-  title.textContent = titles[titleIndex];
-  var randomDescrip1 = getRandomIndex(descriptors);
-  var randomDescrip2 = getRandomIndex(descriptors);
-  descriptor1.innerText = descriptors[randomDescrip1];
-  descriptor2.innerText = descriptors[randomDescrip2];
+function createRandomCover() {
+    var randomCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)])
+    coverImage.src = randomCover.cover;
+    title.textContent = randomCover.title;
+    descriptor1.textContent = randomCover.tagline1;
+    descriptor2.textContent = randomCover.tagline2;
 }
+
+
 
 window.addEventListener('load', createRandomCover());
