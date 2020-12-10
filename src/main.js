@@ -1,18 +1,19 @@
-//Create variables targetting the relevant DOM elements here 👇
 
 var coverImage = document.querySelector(".cover-image");
 var title = document.querySelector(".cover-title");
 var tagLine = document.querySelector(".tagline");
 var descriptor1 = document.querySelector(".tagline-1");
 var descriptor2 = document.querySelector(".tagline-2");
-var randomCoverButton = document.querySelector(".random-cover-button");
-
-
+var btnRandomCover = document.querySelector(".random-cover-button");
+var btnMakeNewCover = document.querySelector(".make-new-button");
+var btnViewSavedCover = document.querySelector(".view-saved-button");
+var btnHome = document.querySelector(".home-button");
+var homeView = document.querySelector(".home-view");
+var formView = document.querySelector(".form-view");
 
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
-
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
@@ -28,6 +29,8 @@ function createRandomCover(){
 
 
 
-window.addEventListener('load', createRandomCover());
+window.addEventListener('load', createRandomCover);//updated this to look like btnRandomCover Event listener
 
-randomCoverButton.addEventListener('click', createRandomCover);
+btnRandomCover.addEventListener('click', createRandomCover);
+
+btnMakeNewCover.addEventListener('click', showCoverForm);
