@@ -27,6 +27,13 @@ function createRandomCover(){
   descriptor2.textContent = randomCover.tagline2;
 }
 
+function showCoverForm() {
+  btnRandomCover.classList.add(".hidden");
+  btnViewSavedCover.classList.add(".hidden");
+  homeView.classList.add(".hidden");
+  btnHome.classList.remove(".hidden");
+  formView.classList.remove(".hidden");
+}
 
 
 window.addEventListener('load', createRandomCover);//updated this to look like btnRandomCover Event listener
