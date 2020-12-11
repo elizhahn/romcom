@@ -22,36 +22,39 @@ var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
 
-
-function leaveHome() {
-  homeView.classList.add("hidden");
-  btnSaveCover.classList.add("hidden");
-  btnRandomCover.classList.add("hidden");
-}
-
-function returnHome() {
-  homeView.classList.remove("hidden");
-  btnSaveCover.classList.remove("hidden");
-  btnRandomCover.classList.remove("hidden");
-}
-
+// Event listeners
 window.addEventListener("load", createRandomCover);
 btnMakeNewCover.addEventListener("click", showForm);
 btnRandomCover.addEventListener("click", createRandomCover);
 btnViewSavedCover.addEventListener("click", showSaved);
 btnHome.addEventListener("click", showHome);
-btnMakeMyBook.addEventListener("click", createNewCover);//Event listener for submitting form
+btnMakeMyBook.addEventListener("click", createNewCover);
 form.addEventListener('submit', handleForm);
 
 //Prevents page reload upon submitting form
 function handleForm(event) { event.preventDefault(); }
 
+//Hides home view and associated buttons, displays home button
+function leaveHome() {
+  homeView.classList.add("hidden");
+  btnSaveCover.classList.add("hidden");
+  btnRandomCover.classList.add("hidden");
+  btnHome.classList.remove("hidden");
+}
+//Displays home view and associated buttons, hides home button
+function returnHome() {
+  homeView.classList.remove("hidden");
+  btnSaveCover.classList.remove("hidden");
+  btnRandomCover.classList.remove("hidden");
+  btnHome.classList.add("hidden");
+}
 
+// Retrieves random array index
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-//When user hits show new random button, a new cover is displayed
+//Event handler for btnRandomCover
 function createRandomCover() {
   var randomCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)])
   coverImage.src = randomCover.cover;
@@ -60,20 +63,20 @@ function createRandomCover() {
   descriptor2.textContent = randomCover.tagline2;
 }
 
-//When user hits Make Your Own Cover, the view changes to the form
+//Event handler for btnMakeNewCover
 function showForm() {
   leaveHome();
   formView.classList.remove("hidden");
   btnHome.classList.remove("hidden");
 }
 
-//When user hits View Saved Covers, saved covers are disiplayed
+//Event handler for btnViewSavedCover
 function showSaved() {
   formView.classList.add("hidden");
   savedView.classList.remove("hidden");
 }
 
-//When user hits home, it takes them to the home page
+//Event handler for btnHome
 function showHome() {
   savedView.classList.add("hidden");
   formView.classList.add("hidden");
@@ -81,9 +84,7 @@ function showHome() {
   returnHome();
 }
 
-// When user clicks Make My Book button, new Cover instance is created from
-// form input values, is displayed on Home view. Form is hidden. Form
-// input values are stored in their respective arrays for future use.
+//Event handler for btnMakeMyBook
 function createNewCover() {
   var createdCover = new Cover(inputCover.value, inputTitle.value, inputDescriptor1.value, inputDescriptor2.value)
 
