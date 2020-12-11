@@ -9,10 +9,15 @@ var btnMakeNewCover = document.querySelector(".make-new-button");
 var btnViewSavedCover = document.querySelector(".view-saved-button");
 var btnHome = document.querySelector(".home-button");
 var btnSaveCover = document.querySelector(".save-cover-button");
+var btnMakeMyBook = document.querySelector(".create-new-book-button");//3rd iteration
 var homeView = document.querySelector(".home-view");
 var savedView = document.querySelector(".saved-view");
 var formView = document.querySelector(".form-view");
-
+var inputCover = document.querySelector(".user-cover");///vars below will be on Jessica's branch
+var inputTitle = document.querySelector(".user-title");
+var inputDescriptor1 = document.querySelector(".user-desc1");
+var inputDescriptor2 = document.querySelector(".user-desc2");
+var form = document.querySelector("form");
 
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
@@ -23,7 +28,23 @@ btnMakeNewCover.addEventListener("click", showForm);
 btnRandomCover.addEventListener("click", createRandomCover);
 btnViewSavedCover.addEventListener("click", showSaved);
 btnHome.addEventListener("click", showHome);
+form.addEventListener('submit', handleForm);
 
+function handleForm(event) { event.preventDefault(); }
+
+function leaveHome() {
+  homeView.classList.add("hidden");
+  btnSaveCover.classList.add("hidden");
+  btnRandomCover.classList.add("hidden");
+  btnHome.classList.remove("hidden");
+}
+
+function returnHome() {
+  homeView.classList.remove("hidden");
+  btnSaveCover.classList.remove("hidden");
+  btnRandomCover.classList.remove("hidden");
+  btnHome.classList.add("hidden");
+}
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
@@ -38,30 +59,20 @@ function createRandomCover() {
 }
 //When user hits Make Your Own Cover, the view changes to the form
 function showForm() {
-  homeView.classList.add("hidden");
-  btnSaveCover.classList.add("hidden");
-  btnRandomCover.classList.add("hidden");
+  leaveHome();
   formView.classList.remove("hidden");
-  btnHome.classList.remove("hidden");
 }
-
-
-var savedCovers = [
-  new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
-];
 
 //When user hits View Saved Covers, saved covers are disiplayed
 function showSaved() {
   formView.classList.add("hidden");
   savedView.classList.remove("hidden");
+  leaveHome();
 }
 
 //when user hits home, it takes them to the home page
 function showHome() {
   savedView.classList.add("hidden");
   formView.classList.add("hidden");
-  btnHome.classList.add("hidden");
-  homeView.classList.remove("hidden");
-  btnSaveCover.classList.remove("hidden");
-  btnRandomCover.classList.remove("hidden");
+  returnHome();
 }
