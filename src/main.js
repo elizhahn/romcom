@@ -10,24 +10,25 @@ var btnViewSavedCover = document.querySelector(".view-saved-button");
 var btnHome = document.querySelector(".home-button");
 var btnSaveCover = document.querySelector(".save-cover-button");
 var homeView = document.querySelector(".home-view");
+var savedView = document.querySelector(".saved-view");
 var formView = document.querySelector(".form-view");
+
 
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
 
-
-window.addEventListener('load', createRandomCover);
-
-btnMakeNewCover.addEventListener('click', showCoverForm);
-
-btnRandomCover.addEventListener('click', createRandomCover);
+window.addEventListener("load", createRandomCover);
+btnMakeNewCover.addEventListener("click", showForm);
+btnRandomCover.addEventListener("click", createRandomCover);
+btnViewSavedCover.addEventListener("click", showSaved);
+btnHome.addEventListener("click", showHome);
 
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-
+//When user hits show new random button, a new cover is displayed
 function createRandomCover() {
   var randomCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)])
   coverImage.src = randomCover.cover;
@@ -35,11 +36,32 @@ function createRandomCover() {
   descriptor1.textContent = randomCover.tagline1;
   descriptor2.textContent = randomCover.tagline2;
 }
-
-function showCoverForm() {
+//When user hits Make Your Own Cover, the view changes to the form
+function showForm() {
   homeView.classList.add("hidden");
   btnSaveCover.classList.add("hidden");
   btnRandomCover.classList.add("hidden");
   formView.classList.remove("hidden");
   btnHome.classList.remove("hidden");
+}
+
+
+var savedCovers = [
+  new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
+];
+
+//When user hits View Saved Covers, saved covers are disiplayed
+function showSaved() {
+  formView.classList.add("hidden");
+  savedView.classList.remove("hidden");
+}
+
+//when user hits home, it takes them to the home page
+function showHome() {
+  savedView.classList.add("hidden");
+  formView.classList.add("hidden");
+  btnHome.classList.add("hidden");
+  homeView.classList.remove("hidden");
+  btnSaveCover.classList.remove("hidden");
+  btnRandomCover.classList.remove("hidden");
 }
