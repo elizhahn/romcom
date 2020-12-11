@@ -47,6 +47,7 @@ function returnHome() {
   btnSaveCover.classList.remove("hidden");
   btnRandomCover.classList.remove("hidden");
   btnHome.classList.add("hidden");
+  formView.classList.add("hidden");
 }
 
 // Retrieves random array index
@@ -61,6 +62,7 @@ function createRandomCover() {
   title.textContent = randomCover.title;
   descriptor1.textContent = randomCover.tagline1;
   descriptor2.textContent = randomCover.tagline2;
+  returnHome();
 }
 
 //Event handler for btnMakeNewCover
@@ -74,29 +76,27 @@ function showForm() {
 function showSaved() {
   formView.classList.add("hidden");
   savedView.classList.remove("hidden");
+  homeView.classList.add("hidden");
 }
 
 //Event handler for btnHome
 function showHome() {
   savedView.classList.add("hidden");
-  formView.classList.add("hidden");
-  btnHome.classList.add("hidden");
   returnHome();
 }
 
 //Event handler for btnMakeMyBook
 function createNewCover() {
-  var createdCover = new Cover(inputCover.value, inputTitle.value, inputDescriptor1.value, inputDescriptor2.value)
-
+  // Create new Cover instance using input values from form, display on home view
+  var createdCover = new Cover(inputCover.value, inputTitle.value, inputDescriptor1.value, inputDescriptor2.value);
   coverImage.src = createdCover.cover;
   title.textContent = createdCover.title;
   descriptor1.textContent = createdCover.tagline1;
   descriptor2.textContent = createdCover.tagline2;
-  covers.push(inputCover.value);
+  returnHome();
+  //Update arrays to include input values from form
+  covers.push(inputCover.value);
   titles.push(inputTitle.value);
   descriptors.push(inputDescriptor1.value);
   descriptors.push(inputDescriptor2.value);
-  formView.classList.add("hidden");
-  btnHome.classList.add("hidden");
-  returnHome();
 }
