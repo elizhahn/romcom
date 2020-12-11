@@ -75,8 +75,7 @@ function showForm() {
 //Event handler for btnViewSavedCover
 function showSaved() {
   formView.classList.add("hidden");
-  savedView.classList.remove("hidden");
-  homeView.classList.add("hidden");
+  leaveHome();
 }
 
 //Event handler for btnHome
