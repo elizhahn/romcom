@@ -8,11 +8,11 @@ var btnMakeNewCover = document.querySelector(".make-new-button");
 var btnViewSavedCover = document.querySelector(".view-saved-button");
 var btnHome = document.querySelector(".home-button");
 var btnSaveCover = document.querySelector(".save-cover-button");
-var btnMakeMyBook = document.querySelector(".create-new-book-button");//3rd iteration
+var btnMakeMyBook = document.querySelector(".create-new-book-button");
 var homeView = document.querySelector(".home-view");
 var savedView = document.querySelector(".saved-view");
 var formView = document.querySelector(".form-view");
-var inputCover = document.querySelector(".user-cover");///vars below will be on Jessica's branch
+var inputCover = document.querySelector(".user-cover")
 var inputTitle = document.querySelector(".user-title");
 var inputDescriptor1 = document.querySelector(".user-desc1");
 var inputDescriptor2 = document.querySelector(".user-desc2");
@@ -27,6 +27,12 @@ function leaveHome() {
   homeView.classList.add("hidden");
   btnSaveCover.classList.add("hidden");
   btnRandomCover.classList.add("hidden");
+}
+
+function returnHome() {
+  homeView.classList.remove("hidden");
+  btnSaveCover.classList.remove("hidden");
+  btnRandomCover.classList.remove("hidden");
 }
 
 window.addEventListener("load", createRandomCover);
@@ -56,10 +62,6 @@ function createRandomCover() {
 
 //When user hits Make Your Own Cover, the view changes to the form
 function showForm() {
-  //possible refactor
-  // homeView.classList.add("hidden");
-  // btnSaveCover.classList.add("hidden");
-  // btnRandomCover.classList.add("hidden");
   leaveHome();
   formView.classList.remove("hidden");
   btnHome.classList.remove("hidden");
@@ -76,14 +78,11 @@ function showHome() {
   savedView.classList.add("hidden");
   formView.classList.add("hidden");
   btnHome.classList.add("hidden");
-  //possible refactor
-  homeView.classList.remove("hidden");
-  btnSaveCover.classList.remove("hidden");
-  btnRandomCover.classList.remove("hidden");
+  returnHome();
 }
 
 // When user clicks Make My Book button, new Cover instance is created from
-// form input values, is displayed on Home view. Form is hidden. Form inputTitle
+// form input values, is displayed on Home view. Form is hidden. Form
 // input values are stored in their respective arrays for future use.
 function createNewCover() {
   var createdCover = new Cover(inputCover.value, inputTitle.value, inputDescriptor1.value, inputDescriptor2.value)
@@ -98,8 +97,5 @@ function createNewCover() {
   descriptors.push(inputDescriptor2.value);
   formView.classList.add("hidden");
   btnHome.classList.add("hidden");
-  //possible refactor
-  homeView.classList.remove("hidden");
-  btnSaveCover.classList.remove("hidden");
-  btnRandomCover.classList.remove("hidden");
+  returnHome();
 }
