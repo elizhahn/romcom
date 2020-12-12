@@ -17,6 +17,8 @@ var inputTitle = document.querySelector(".user-title");
 var inputDescriptor1 = document.querySelector(".user-desc1");
 var inputDescriptor2 = document.querySelector(".user-desc2");
 var form = document.querySelector("form");
+var viewSavedCovers = document.querySelector(".saved-covers-section");
+
 
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
@@ -30,6 +32,7 @@ btnViewSavedCover.addEventListener("click", showSaved);
 btnHome.addEventListener("click", showHome);
 btnMakeMyBook.addEventListener("click", createNewCover);
 form.addEventListener('submit', handleForm);
+btnSaveCover.addEventListener('click', saveCover);
 
 //Prevents page reload upon submitting form
 function handleForm(event) {
@@ -50,6 +53,7 @@ function returnHome() {
   btnRandomCover.classList.remove("hidden");
   btnHome.classList.add("hidden");
   formView.classList.add("hidden");
+  savedView.classList.add("hidden");
 };
 
 // Retrieves random array index
@@ -78,17 +82,17 @@ function showForm() {
   btnHome.classList.remove("hidden");
 };
 
+
 //Event handler for btnViewSavedCover
 function showSaved() {
-  formView.classList.add("hidden");
+  savedView.classList.remove("hidden");
   leaveHome();
-};
 
 //Event handler for btnHome
 function showHome() {
-  savedView.classList.add("hidden");
   returnHome();
 };
+
 
 //Event handler for btnMakeMyBook
 function createNewCover() {
@@ -104,4 +108,14 @@ function createNewCover() {
   titles.push(inputTitle.value);
   descriptors.push(inputDescriptor1.value);
   descriptors.push(inputDescriptor2.value);
+  //Save created Cover to hidden array
+  hiddenCover = createdCover;
+};
+
+//Checks user's cover for duplicates before adding to Saved Covers array
+var hiddenCover = [];
+function saveCover() {
+  if (!savedCovers.includes(hiddenCover)){
+    savedCovers.push(hiddenCover);
+  };
 };
