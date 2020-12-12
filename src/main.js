@@ -32,7 +32,7 @@ window.addEventListener("load", createRandomCover);
 btnMakeNewCover.addEventListener("click", showForm);
 btnRandomCover.addEventListener("click", createRandomCover);
 btnViewSavedCover.addEventListener("click", showSaved);
-btnHome.addEventListener("click", showHome);
+btnHome.addEventListener("click", returnHome);
 btnMakeMyBook.addEventListener("click", createNewCover);
 form.addEventListener('submit', handleForm);
 btnSaveCover.addEventListener('click', saveCover);
@@ -49,6 +49,8 @@ function leaveHome() {
   btnRandomCover.classList.add("hidden");
   btnHome.classList.remove("hidden");
 };
+
+//Event handler for btnHome
 //Displays home view and associated buttons, hides home button
 function returnHome() {
   homeView.classList.remove("hidden");
@@ -100,11 +102,6 @@ function showSaved() {
   <img class="price-tag" src="./assets/price.png">
   <img class="overlay" src="./assets/overlay.png"> `;
   };
-};
-
-//Event handler for btnHome
-function showHome() {
-  returnHome();
 };
 
 
