@@ -94,6 +94,7 @@ function showSaved() {
   savedView.classList.remove("hidden");
   formView.classList.add("hidden");
   leaveHome();
+  viewSavedCovers.innerHTML = "";
   for (var i = 0; i < savedCovers.length; i++) {
   viewSavedCovers.innerHTML += `<section class="main-cover mini-cover">
     <img class="cover-image" src="${savedCovers[i].cover}">
