@@ -1,25 +1,28 @@
+//Book Cover HTML elements
 var coverImage = document.querySelector(".cover-image");
 var title = document.querySelector(".cover-title");
 var tagLine = document.querySelector(".tagline");
 var descriptor1 = document.querySelector(".tagline-1");
 var descriptor2 = document.querySelector(".tagline-2");
+//Control buttons HTML elements
 var btnRandomCover = document.querySelector(".random-cover-button");
 var btnMakeNewCover = document.querySelector(".make-new-button");
 var btnViewSavedCover = document.querySelector(".view-saved-button");
 var btnHome = document.querySelector(".home-button");
 var btnSaveCover = document.querySelector(".save-cover-button");
 var btnMakeMyBook = document.querySelector(".create-new-book-button");
+//Page views HTML elements
 var homeView = document.querySelector(".home-view");
 var savedView = document.querySelector(".saved-view");
 var formView = document.querySelector(".form-view");
+//Form/inputs HTML elements
 var inputCover = document.querySelector(".user-cover")
 var inputTitle = document.querySelector(".user-title");
 var inputDescriptor1 = document.querySelector(".user-desc1");
 var inputDescriptor2 = document.querySelector(".user-desc2");
 var form = document.querySelector("form");
+//Saved book covers/HTML elements
 var viewSavedCovers = document.querySelector(".saved-covers-section");
-
-
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
@@ -97,8 +100,6 @@ function showSaved() {
   <img class="overlay" src="./assets/overlay.png"> `;
   };
 };
-
-
 
 //Event handler for btnHome
 function showHome() {
