@@ -32,7 +32,9 @@ btnMakeMyBook.addEventListener("click", createNewCover);
 form.addEventListener('submit', handleForm);
 
 //Prevents page reload upon submitting form
-function handleForm(event) { event.preventDefault(); }
+function handleForm(event) {
+  event.preventDefault();
+};
 
 //Hides home view and associated buttons, displays home button
 function leaveHome() {
@@ -40,7 +42,7 @@ function leaveHome() {
   btnSaveCover.classList.add("hidden");
   btnRandomCover.classList.add("hidden");
   btnHome.classList.remove("hidden");
-}
+};
 //Displays home view and associated buttons, hides home button
 function returnHome() {
   homeView.classList.remove("hidden");
@@ -48,41 +50,45 @@ function returnHome() {
   btnRandomCover.classList.remove("hidden");
   btnHome.classList.add("hidden");
   formView.classList.add("hidden");
-}
+};
 
 // Retrieves random array index
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
-}
+};
 
 //Event handler for btnRandomCover
 function createRandomCover() {
-  var randomCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)])
+  var coverInstance = covers[getRandomIndex(covers)];
+  var titleInstance = titles[getRandomIndex(titles)];
+  var descrip1Instance = descriptors[getRandomIndex(descriptors)];
+  var descrip2Instance = descriptors[getRandomIndex(descriptors)];
+  var randomCover = new Cover(coverInstance, titleInstance, descrip1Instance, descrip2Instance);
   coverImage.src = randomCover.cover;
   title.textContent = randomCover.title;
   descriptor1.textContent = randomCover.tagline1;
   descriptor2.textContent = randomCover.tagline2;
   returnHome();
-}
+};
 
 //Event handler for btnMakeNewCover
 function showForm() {
   leaveHome();
   formView.classList.remove("hidden");
   btnHome.classList.remove("hidden");
-}
+};
 
 //Event handler for btnViewSavedCover
 function showSaved() {
   formView.classList.add("hidden");
   leaveHome();
-}
+};
 
 //Event handler for btnHome
 function showHome() {
   savedView.classList.add("hidden");
   returnHome();
-}
+};
 
 //Event handler for btnMakeMyBook
 function createNewCover() {
@@ -98,4 +104,4 @@ function createNewCover() {
   titles.push(inputTitle.value);
   descriptors.push(inputDescriptor1.value);
   descriptors.push(inputDescriptor2.value);
-}
+};
