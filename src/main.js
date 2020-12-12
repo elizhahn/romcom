@@ -94,15 +94,16 @@ function showSaved() {
   savedView.classList.remove("hidden");
   formView.classList.add("hidden");
   leaveHome();
-  viewSavedCovers.classList.add("mini-cover");
   for (var i = 0; i < savedCovers.length; i++) {
-  viewSavedCovers.innerHTML = `<img class="cover-image" src="${savedCovers[i].cover}"/>
-  <h2 class="cover-title">${savedCovers[i].title}</h2>
-  <h3 class="tagline">A Tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
-  <img class="price-tag" src="./assets/price.png">
-  <img class="overlay" src="./assets/overlay.png"> `;
+  viewSavedCovers.innerHTML += `<section class="main-cover mini-cover">
+    <img class="cover-image" src="${savedCovers[i].cover}">
+    <h2 class="cover-title">${savedCovers[i].title}</h2>
+    <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+    <img class="price-tag" src="./assets/price.png">
+    <img class="overlay" src="./assets/overlay.png">
+  </section>`;
   };
-};
+  };
 
 
 //Event handler for btnMakeMyBook
@@ -124,7 +125,7 @@ function createNewCover() {
 };
 
 //Checks user's cover for duplicates before adding to Saved Covers array
-var hiddenCover = [];
+var hiddenCover;
 function saveCover() {
   if (!savedCovers.includes(hiddenCover)){
     savedCovers.push(hiddenCover);
