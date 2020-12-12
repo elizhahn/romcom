@@ -82,6 +82,7 @@ function createRandomCover() {
 function showForm() {
   leaveHome();
   formView.classList.remove("hidden");
+  savedView.classList.add("hidden");
   btnHome.classList.remove("hidden");
 };
 
