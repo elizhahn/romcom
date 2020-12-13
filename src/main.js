@@ -15,10 +15,10 @@ var homeView = document.querySelector(".home-view");
 var savedView = document.querySelector(".saved-view");
 var formView = document.querySelector(".form-view");
 //Form/inputs HTML elements
-var inputCover = document.querySelector(".user-cover")
-var inputTitle = document.querySelector(".user-title");
-var inputDescriptor1 = document.querySelector(".user-desc1");
-var inputDescriptor2 = document.querySelector(".user-desc2");
+var inputCover = document.querySelector("#cover")
+var inputTitle = document.querySelector("#title");
+var inputDescriptor1 = document.querySelector("#descriptor1");
+var inputDescriptor2 = document.querySelector("#descriptor2");
 //Saved book covers/HTML elements
 var viewSavedCovers = document.querySelector(".saved-covers-section");
 //User's saved covers
@@ -27,7 +27,6 @@ var savedCovers = [
 ];
 //Holds cover instance
 var currentCover;
-
 
 // Event listeners
 window.addEventListener("load", createRandomCover);
@@ -64,6 +63,14 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
 
+//Displays Cover instance on homepage
+function displayCover(cover) {
+  coverImage.src = cover.cover;
+  title.textContent = cover.title;
+  descriptor1.textContent = cover.tagline1;
+  descriptor2.textContent = cover.tagline2;
+};
+
 //Event handler for btnRandomCover
 function createRandomCover() {
   var coverInstance = covers[getRandomIndex(covers)];
@@ -76,14 +83,6 @@ function createRandomCover() {
   returnHome();
 };
 
-//Displays Cover instance on homepage
-function displayCover(cover) {
-  coverImage.src = cover.cover;
-  title.textContent = cover.title;
-  descriptor1.textContent = cover.tagline1;
-  descriptor2.textContent = cover.tagline2;
-};
-
 //Event handler for btnMakeNewCover
 function showForm() {
   leaveHome();
@@ -92,6 +91,21 @@ function showForm() {
   btnHome.classList.remove("hidden");
 };
 
+//Event handler for btnMakeMyBook
+function createNewCover(event) {
+  // Create new Cover instance using input values from form, display on home view
+  var createdCover = new Cover(inputCover.value, inputTitle.value, inputDescriptor1.value, inputDescriptor2.value);
+  displayCover(createdCover);
+  returnHome();
+  //Update arrays to include input values from form
+  covers.push(inputCover.value);
+  titles.push(inputTitle.value);
+  descriptors.push(inputDescriptor1.value);
+  descriptors.push(inputDescriptor2.value);
+  //Save created Cover to hidden array
+  currentCover = createdCover;
+  event.preventDefault();
+};
 
 //Event handler for btnViewSavedCover
 function showSaved() {
@@ -108,23 +122,6 @@ function showSaved() {
       <img class="overlay" src="./assets/overlay.png">
     </section>`;
     };
-};
-
-
-//Event handler for btnMakeMyBook
-function createNewCover(event) {
-  // Create new Cover instance using input values from form, display on home view
-  var createdCover = new Cover(inputCover.value, inputTitle.value, inputDescriptor1.value, inputDescriptor2.value);
-  displayCover(createdCover);
-  returnHome();
-  //Update arrays to include input values from form
-  covers.push(inputCover.value);
-  titles.push(inputTitle.value);
-  descriptors.push(inputDescriptor1.value);
-  descriptors.push(inputDescriptor2.value);
-  //Save created Cover to hidden array
-  currentCover = createdCover;
-  event.preventDefault();
 };
 
 //Checks user's cover for duplicates before adding to Saved Covers array
