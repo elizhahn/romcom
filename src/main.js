@@ -1,7 +1,6 @@
 //Book Cover HTML elements
 var coverImage = document.querySelector(".cover-image");
 var title = document.querySelector(".cover-title");
-var tagline = document.querySelector(".tagline");
 var descriptor1 = document.querySelector(".tagline-1");
 var descriptor2 = document.querySelector(".tagline-2");
 //Control buttons HTML elements
