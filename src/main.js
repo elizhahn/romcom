@@ -15,18 +15,18 @@ var homeView = document.querySelector(".home-view");
 var savedView = document.querySelector(".saved-view");
 var formView = document.querySelector(".form-view");
 //Form/inputs HTML elements
-var inputCover = document.querySelector(".user-cover")
-var inputTitle = document.querySelector(".user-title");
-var inputDescriptor1 = document.querySelector(".user-desc1");
-var inputDescriptor2 = document.querySelector(".user-desc2");
+var inputCover = document.querySelector("#cover")
+var inputTitle = document.querySelector("#title");
+var inputDescriptor1 = document.querySelector("#descriptor1");
+var inputDescriptor2 = document.querySelector("#descriptor2");
 //Saved book covers/HTML elements
 var viewSavedCovers = document.querySelector(".saved-covers-section");
+//User's saved covers
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
-//
+//Holds cover instance
 var currentCover;
-
 
 // Event listeners
 window.addEventListener("load", createRandomCover);
@@ -35,7 +35,8 @@ btnRandomCover.addEventListener("click", createRandomCover);
 btnViewSavedCover.addEventListener("click", showSaved);
 btnHome.addEventListener("click", returnHome);
 btnMakeMyBook.addEventListener("click", createNewCover);
-btnSaveCover.addEventListener('click', saveCover);
+btnSaveCover.addEventListener("click", saveCover);
+viewSavedCovers.addEventListener("dblclick", deleteSavedCovers);
 
 
 //Hides home view and associated buttons, displays home button
@@ -62,6 +63,14 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
 
+//Displays Cover instance on homepage
+function displayCover(cover) {
+  coverImage.src = cover.cover;
+  title.textContent = cover.title;
+  descriptor1.textContent = cover.tagline1;
+  descriptor2.textContent = cover.tagline2;
+};
+
 //Event handler for btnRandomCover
 function createRandomCover() {
   var coverInstance = covers[getRandomIndex(covers)];
@@ -74,14 +83,6 @@ function createRandomCover() {
   returnHome();
 };
 
-//Displays Cover instance on homepage
-function displayCover(cover) {
-  coverImage.src = cover.cover;
-    title.textContent = cover.title;
-    descriptor1.textContent = cover.tagline1;
-    descriptor2.textContent = cover.tagline2;
-};
-
 //Event handler for btnMakeNewCover
 function showForm() {
   leaveHome();
@@ -89,25 +90,6 @@ function showForm() {
   savedView.classList.add("hidden");
   btnHome.classList.remove("hidden");
 };
-
-
-//Event handler for btnViewSavedCover
-function showSaved() {
-  savedView.classList.remove("hidden");
-  formView.classList.add("hidden");
-  leaveHome();
-  viewSavedCovers.innerHTML = "";
-  for (var i = 0; i < savedCovers.length; i++) {
-  viewSavedCovers.innerHTML += `<section class="main-cover mini-cover">
-    <img class="cover-image" src="${savedCovers[i].cover}" id="${savedCovers[i].id}">
-    <h2 class="cover-title" id="${savedCovers[i].id}">${savedCovers[i].title}</h2>
-    <h3 class="tagline" id="${savedCovers[i].id}">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
-    <img class="price-tag" id="${savedCovers[i].id}" src="./assets/price.png">
-    <img class="overlay" src="./assets/overlay.png">
-  </section>`;
-  };
-  };
-
 
 //Event handler for btnMakeMyBook
 function createNewCover(event) {
@@ -125,9 +107,37 @@ function createNewCover(event) {
   event.preventDefault();
 };
 
+//Event handler for btnViewSavedCover
+function showSaved() {
+  savedView.classList.remove("hidden");
+  formView.classList.add("hidden");
+  leaveHome();
+  viewSavedCovers.innerHTML = "";
+    for (var i = 0; i < savedCovers.length; i++) {
+    viewSavedCovers.innerHTML += `<section class="main-cover mini-cover">
+      <img class="cover-image" src="${savedCovers[i].cover}" id="${savedCovers[i].id}">
+      <h2 class="cover-title" id="${savedCovers[i].id}">${savedCovers[i].title}</h2>
+      <h3 class="tagline" id="${savedCovers[i].id}">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+      <img class="price-tag" id="${savedCovers[i].id}" src="./assets/price.png">
+      <img class="overlay" src="./assets/overlay.png">
+    </section>`;
+    };
+};
+
 //Checks user's cover for duplicates before adding to Saved Covers array
 function saveCover() {
-  if (!savedCovers.includes(currentCover)){
+  if (!savedCovers.includes(currentCover)) {
     savedCovers.push(currentCover);
   };
+};
+
+//Event handler for deleting cover on dblclicking
+function deleteSavedCovers(e) {
+  var elementId = e.target.getAttribute("id");
+    for (var i = 0; i < savedCovers.length; i++) {
+      if (savedCovers[i].id == elementId) {
+        savedCovers.splice(i, 1);
+      };
+    };
+  showSaved();
 };
