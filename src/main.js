@@ -132,3 +132,14 @@ function saveCover() {
     savedCovers.push(currentCover);
   };
 };
+
+//Event handler for deleting cover on dblclicking 
+function deleteSavedCovers(e) {
+var elementId = e.target.getAttribute("id");
+for (var i = 0; i < savedCovers.length; i++) {
+ if (savedCovers[i].id == elementId) {
+  savedCovers.splice(i, 1);
+  showSaved();
+ }
+}
+};
