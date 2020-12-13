@@ -36,6 +36,7 @@ btnViewSavedCover.addEventListener("click", showSaved);
 btnHome.addEventListener("click", returnHome);
 btnMakeMyBook.addEventListener("click", createNewCover);
 btnSaveCover.addEventListener('click', saveCover);
+viewSavedCovers.addEventListener('dblclick', deleteSavedCovers);
 
 
 //Hides home view and associated buttons, displays home button
