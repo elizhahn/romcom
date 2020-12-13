@@ -24,6 +24,8 @@ var viewSavedCovers = document.querySelector(".saved-covers-section");
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
+// 
+var currentCover;
 
 
 // Event listeners
@@ -118,14 +120,13 @@ function createNewCover(event) {
   descriptors.push(inputDescriptor1.value);
   descriptors.push(inputDescriptor2.value);
   //Save created Cover to hidden array
-  hiddenCover = createdCover;
+  currentCover = createdCover;
   event.preventDefault();
 };
 
 //Checks user's cover for duplicates before adding to Saved Covers array
-var hiddenCover;
 function saveCover() {
-  if (!savedCovers.includes(hiddenCover)){
-    savedCovers.push(hiddenCover);
+  if (!savedCovers.includes(currentCover)){
+    savedCovers.push(currentCover);
   };
 };
