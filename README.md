@@ -56,7 +56,7 @@ This is a Turing School of Software and Design Module 1 project. The project con
 
 When user visits the page, a random romance cover should be displayed in the window on the landing page. When the user refreshes the page, a new romance cover should be generated and displayed.
 
-![](https://media.giphy.com/media/jjDIOlalAIujsWHDnl/giphy.gif)
+![](https://media.giphy.com/media/PYMrHBhtQPjTWZc4Ro/giphy.gif)
 
 
 ## Create Random Cover
