@@ -26,7 +26,6 @@ var savedCovers = [
 var currentCover;
 
 // Event listeners
-window.addEventListener("load", createRandomCover);
 btnMakeNewCover.addEventListener("click", showForm);
 btnRandomCover.addEventListener("click", createRandomCover);
 btnViewSavedCover.addEventListener("click", showSaved);
@@ -34,6 +33,7 @@ btnHome.addEventListener("click", returnHome);
 btnMakeMyBook.addEventListener("click", createNewCover);
 btnSaveCover.addEventListener("click", saveCover);
 viewSavedCovers.addEventListener("dblclick", deleteSavedCovers);
+window.addEventListener("load", createRandomCover);
 
 
 //Hides home view and associated buttons, displays home button
@@ -106,17 +106,21 @@ function showSaved() {
   savedView.classList.remove("hidden");
   formView.classList.add("hidden");
   leaveHome();
-  viewSavedCovers = "";
+  let miniCovers = "";
   savedCovers.forEach(cover => {
-    viewSavedCovers.innerHTML += `<section class="main-cover mini-cover">
-      <img class="cover-image" src="${savedCovers.cover}" id="${savedCovers.id}">
-      <h2 class="cover-title" id="${savedCovers.id}">${savedCovers.title}</h2>
-      <h3 class="tagline" id="${savedCovers.id}">A tale of <span class="tagline-1">${savedCovers.tagline1}</span> and <span class="tagline-2">${savedCovers.tagline2}</span></h3>
-      <img class="price-tag" id="${savedCovers.id}" src="./assets/price.png">
-      <img class="overlay" src="./assets/overlay.png">
-    </section>`;
+    console.log(savedCovers.title)
+    miniCovers += `
+    <section class="main-cover mini-cover">
+    <img class="cover-image" src="${cover.cover}" id="${cover.id}">
+    <h2 class="cover-title" id="${cover.id}">${cover.title}</h2>
+    <h3 class="tagline" id="${cover.id}">A tale of <span class="tagline-1">${cover.tagline1}</span> and <span class="tagline-2">${cover.tagline2}</span></h3>
+    <img class="price-tag" id="${cover.id}" src="./assets/price.png">
+    <img class="overlay" src="./assets/overlay.png">
+    </section>`
   });
+  viewSavedCovers.innerHTML = miniCovers
 }
+
 
 //Checks user's cover for duplicates before adding to Saved Covers array
 function saveCover() {
@@ -125,7 +129,7 @@ function saveCover() {
   };
 };
 
-//Event handler for deleting cover on dblclicking
+// Event handler for deleting cover on dblclicking
 function deleteSavedCovers(e) {
   var elementId = e.target.getAttribute("id");
     for (var i = 0; i < savedCovers.length; i++) {
@@ -135,3 +139,15 @@ function deleteSavedCovers(e) {
     };
   showSaved();
 };
+
+//Refactor deleteSavedCovers(e)
+// function deleteSavedCovers(e) {
+//   const elementId = e.target.getAttribute("id");
+//   savedCovers.forEach(cover => {
+//     if(savedCovers.id === elementId) {
+//       const coverIndex = savedCovers.indexOf(savedCovers.id)
+//       savedCovers.splice(coverIndex, 1);
+//     }
+//   });
+//  showSaved();
+// };
