@@ -121,7 +121,6 @@ function showSaved() {
   viewSavedCovers.innerHTML = miniCovers
 }
 
-
 //Checks user's cover for duplicates before adding to Saved Covers array
 function saveCover() {
   if (!savedCovers.includes(currentCover)) {
@@ -129,25 +128,13 @@ function saveCover() {
   };
 };
 
-// Event handler for deleting cover on dblclicking
 function deleteSavedCovers(e) {
-  var elementId = e.target.getAttribute("id");
-    for (var i = 0; i < savedCovers.length; i++) {
-      if (savedCovers[i].id == elementId) {
-        savedCovers.splice(i, 1);
-      };
-    };
-  showSaved();
+  const elementId = Number(e.target.getAttribute("id"));
+  savedCovers.forEach(cover => {
+    if(cover.id === elementId) {
+      const coverIndex = savedCovers.indexOf(cover.id)
+      savedCovers.splice(coverIndex, 1);
+    }
+  });
+ showSaved();
 };
-
-//Refactor deleteSavedCovers(e)
-// function deleteSavedCovers(e) {
-//   const elementId = e.target.getAttribute("id");
-//   savedCovers.forEach(cover => {
-//     if(savedCovers.id === elementId) {
-//       const coverIndex = savedCovers.indexOf(savedCovers.id)
-//       savedCovers.splice(coverIndex, 1);
-//     }
-//   });
-//  showSaved();
-// };
