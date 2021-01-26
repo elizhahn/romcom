@@ -1,31 +1,28 @@
-//Book Cover HTML elements
+
+const mainCover = document.querySelector(".main-cover")
 var coverImage = document.querySelector(".cover-image");
 var title = document.querySelector(".cover-title");
 var descriptor1 = document.querySelector(".tagline-1");
 var descriptor2 = document.querySelector(".tagline-2");
-//Control buttons HTML elements
 var btnRandomCover = document.querySelector(".random-cover-button");
 var btnMakeNewCover = document.querySelector(".make-new-button");
 var btnViewSavedCover = document.querySelector(".view-saved-button");
 var btnHome = document.querySelector(".home-button");
 var btnSaveCover = document.querySelector(".save-cover-button");
 var btnMakeMyBook = document.querySelector(".create-new-book-button");
-//Page views HTML elements
 var homeView = document.querySelector(".home-view");
 var savedView = document.querySelector(".saved-view");
 var formView = document.querySelector(".form-view");
-//Form/inputs HTML elements
 var inputCover = document.querySelector("#cover")
 var inputTitle = document.querySelector("#title");
 var inputDescriptor1 = document.querySelector("#descriptor1");
 var inputDescriptor2 = document.querySelector("#descriptor2");
-//Saved book covers/HTML elements
 var viewSavedCovers = document.querySelector(".saved-covers-section");
-//User's saved covers
+
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
-//Holds cover instance
+
 var currentCover;
 
 // Event listeners
@@ -48,7 +45,6 @@ function leaveHome() {
 };
 
 //Event handler for btnHome
-//Displays home view and associated buttons, hides home button
 function returnHome() {
   homeView.classList.remove("hidden");
   btnSaveCover.classList.remove("hidden");
@@ -65,23 +61,25 @@ function getRandomIndex(array) {
 
 //Displays Cover instance on homepage
 function displayCover(cover) {
-  coverImage.src = cover.cover;
-  title.textContent = cover.title;
-  descriptor1.textContent = cover.tagline1;
-  descriptor2.textContent = cover.tagline2;
+mainCover.innerHTML = `
+  <img class="cover-image" src="${cover.cover}">
+  <h2 class="cover-title">${cover.title}</h2>
+  <h3 class="tagline">A tale of <span class="tagline-1">${cover.tagline1}</span> and <span class="tagline-2">${cover.tagline2}</span></h3>
+  <img class="price-tag" src="./assets/price.png">
+  <img class="overlay" src="./assets/overlay.png">`
 };
 
-//Event handler for btnRandomCover
+//Refactor createRandomCover
 function createRandomCover() {
-  var coverInstance = covers[getRandomIndex(covers)];
-  var titleInstance = titles[getRandomIndex(titles)];
-  var descrip1Instance = descriptors[getRandomIndex(descriptors)];
-  var descrip2Instance = descriptors[getRandomIndex(descriptors)];
-  var randomCover = new Cover(coverInstance, titleInstance, descrip1Instance, descrip2Instance);
-  currentCover = randomCover;
-  displayCover(randomCover);
-  returnHome();
-};
+const cover = covers[getRandomIndex(covers)];
+const title = titles[getRandomIndex(titles)];
+const tagline1 = descriptors[getRandomIndex(descriptors)];
+const tagline2 = descriptors[getRandomIndex(descriptors)];
+let randomCover = new Cover(cover, title, tagline1, tagline2);
+currentCover = randomCover;
+displayCover(randomCover);
+returnHome();
+}
 
 //Event handler for btnMakeNewCover
 function showForm() {
@@ -93,16 +91,13 @@ function showForm() {
 
 //Event handler for btnMakeMyBook
 function createNewCover(event) {
-  // Create new Cover instance using input values from form, display on home view
   var createdCover = new Cover(inputCover.value, inputTitle.value, inputDescriptor1.value, inputDescriptor2.value);
   displayCover(createdCover);
   returnHome();
-  //Update arrays to include input values from form
   covers.push(inputCover.value);
   titles.push(inputTitle.value);
   descriptors.push(inputDescriptor1.value);
   descriptors.push(inputDescriptor2.value);
-  //Save created Cover to hidden array
   currentCover = createdCover;
   event.preventDefault();
 };
