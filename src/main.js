@@ -1,9 +1,5 @@
 
 const mainCover = document.querySelector(".main-cover")
-var coverImage = document.querySelector(".cover-image");
-var title = document.querySelector(".cover-title");
-var descriptor1 = document.querySelector(".tagline-1");
-var descriptor2 = document.querySelector(".tagline-2");
 var btnRandomCover = document.querySelector(".random-cover-button");
 var btnMakeNewCover = document.querySelector(".make-new-button");
 var btnViewSavedCover = document.querySelector(".view-saved-button");
@@ -25,7 +21,6 @@ var savedCovers = [
 
 var currentCover;
 
-// Event listeners
 btnMakeNewCover.addEventListener("click", showForm);
 btnRandomCover.addEventListener("click", createRandomCover);
 btnViewSavedCover.addEventListener("click", showSaved);
@@ -36,7 +31,6 @@ viewSavedCovers.addEventListener("dblclick", deleteSavedCovers);
 window.addEventListener("load", createRandomCover);
 
 
-//Hides home view and associated buttons, displays home button
 function leaveHome() {
   homeView.classList.add("hidden");
   btnSaveCover.classList.add("hidden");
@@ -44,7 +38,6 @@ function leaveHome() {
   btnHome.classList.remove("hidden");
 };
 
-//Event handler for btnHome
 function returnHome() {
   homeView.classList.remove("hidden");
   btnSaveCover.classList.remove("hidden");
@@ -54,12 +47,10 @@ function returnHome() {
   savedView.classList.add("hidden");
 };
 
-// Retrieves random array index
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
 
-//Displays Cover instance on homepage
 function displayCover(cover) {
 mainCover.innerHTML = `
   <img class="cover-image" src="${cover.cover}">
@@ -69,7 +60,6 @@ mainCover.innerHTML = `
   <img class="overlay" src="./assets/overlay.png">`
 };
 
-//Refactor createRandomCover
 function createRandomCover() {
 const cover = covers[getRandomIndex(covers)];
 const title = titles[getRandomIndex(titles)];
@@ -81,7 +71,6 @@ displayCover(randomCover);
 returnHome();
 }
 
-//Event handler for btnMakeNewCover
 function showForm() {
   leaveHome();
   formView.classList.remove("hidden");
@@ -89,7 +78,6 @@ function showForm() {
   btnHome.classList.remove("hidden");
 };
 
-//Event handler for btnMakeMyBook
 function createNewCover(event) {
   var createdCover = new Cover(inputCover.value, inputTitle.value, inputDescriptor1.value, inputDescriptor2.value);
   displayCover(createdCover);
@@ -121,7 +109,6 @@ function showSaved() {
   viewSavedCovers.innerHTML = miniCovers
 }
 
-//Checks user's cover for duplicates before adding to Saved Covers array
 function saveCover() {
   if (!savedCovers.includes(currentCover)) {
     savedCovers.push(currentCover);
