@@ -25,9 +25,9 @@ btnMakeNewCover.addEventListener("click", showForm);
 btnRandomCover.addEventListener("click", createRandomCover);
 btnViewSavedCover.addEventListener("click", createMiniCover);
 btnHome.addEventListener("click", returnHome);
-btnMakeMyBook.addEventListener("click", createNewCover);
+btnMakeMyBook.addEventListener("click", submitForm);
 btnSaveCover.addEventListener("click", saveCover);
-viewSavedCovers.addEventListener("dblclick", deleteSavedCovers);
+viewSavedCovers.addEventListener("dblclick", deleteCover);
 window.addEventListener("load", createRandomCover);
 
 
@@ -83,6 +83,10 @@ displayCover(randomCover);
 returnHome();
 }
 
+function submitForm() {
+  createNewCover(event)
+}
+
 function createNewCover(event) {
   var createdCover = new Cover(inputCover.value, inputTitle.value, inputDescriptor1.value, inputDescriptor2.value);
   displayCover(createdCover);
@@ -98,7 +102,6 @@ function createNewCover(event) {
 function createMiniCover() {
   let miniCovers = "";
   savedCovers.forEach(cover => {
-    console.log(savedCovers.title)
     miniCovers += `
     <section class="main-cover mini-cover">
     <img class="cover-image" src="${cover.cover}" id="${cover.id}">
@@ -118,6 +121,10 @@ function saveCover() {
   };
 };
 
+function deleteCover() {
+  deleteSavedCovers(event);
+}
+
 function deleteSavedCovers(event) {
   const elementId = Number(event.target.getAttribute("id"));
   savedCovers.forEach(cover => {
@@ -126,5 +133,5 @@ function deleteSavedCovers(event) {
       savedCovers.splice(coverIndex, 1);
     }
   });
- showSaved();
+ createMiniCover();
 };
