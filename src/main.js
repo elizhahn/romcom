@@ -23,7 +23,7 @@ var currentCover;
 
 btnMakeNewCover.addEventListener("click", showForm);
 btnRandomCover.addEventListener("click", createRandomCover);
-btnViewSavedCover.addEventListener("click", showSaved);
+btnViewSavedCover.addEventListener("click", createMiniCover);
 btnHome.addEventListener("click", returnHome);
 btnMakeMyBook.addEventListener("click", createNewCover);
 btnSaveCover.addEventListener("click", saveCover);
@@ -46,6 +46,18 @@ function returnHome() {
   formView.classList.add("hidden");
   savedView.classList.add("hidden");
 };
+
+function showForm() {
+  leaveHome();
+  formView.classList.remove("hidden");
+  savedView.classList.add("hidden");
+};
+
+function showSaved() {
+  leaveHome();
+  savedView.classList.remove("hidden");
+  formView.classList.add("hidden");
+}
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
@@ -71,13 +83,6 @@ displayCover(randomCover);
 returnHome();
 }
 
-function showForm() {
-  leaveHome();
-  formView.classList.remove("hidden");
-  savedView.classList.add("hidden");
-  btnHome.classList.remove("hidden");
-};
-
 function createNewCover(event) {
   var createdCover = new Cover(inputCover.value, inputTitle.value, inputDescriptor1.value, inputDescriptor2.value);
   displayCover(createdCover);
@@ -90,10 +95,7 @@ function createNewCover(event) {
   event.preventDefault();
 };
 
-function showSaved() {
-  savedView.classList.remove("hidden");
-  formView.classList.add("hidden");
-  leaveHome();
+function createMiniCover() {
   let miniCovers = "";
   savedCovers.forEach(cover => {
     console.log(savedCovers.title)
@@ -107,6 +109,7 @@ function showSaved() {
     </section>`
   });
   viewSavedCovers.innerHTML = miniCovers
+  showSaved();
 }
 
 function saveCover() {
@@ -115,8 +118,8 @@ function saveCover() {
   };
 };
 
-function deleteSavedCovers(e) {
-  const elementId = Number(e.target.getAttribute("id"));
+function deleteSavedCovers(event) {
+  const elementId = Number(event.target.getAttribute("id"));
   savedCovers.forEach(cover => {
     if(cover.id === elementId) {
       const coverIndex = savedCovers.indexOf(cover.id)
