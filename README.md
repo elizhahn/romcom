@@ -1,5 +1,5 @@
 
-# title: RomCom 
+# RomCom 
 
 A [Front-End Project](https://github.com/turingschool-examples/romcom/) by [Elizabeth Hahn](https://github.com/elizhahn) and [Jessica Justice](https://github.com/m1073496)
 * Project Manager: [Kayla Wood](https://github.com/kaylaewood)
